@@ -1,5 +1,5 @@
 {
-  "name": "aws-wsgi-flask",
+  "name": "aws-serverless-authorizer",
   "description": "this is flask example",
   "version": "0.0.1",
   "dependencies": {},

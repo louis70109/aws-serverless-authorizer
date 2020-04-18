@@ -1,4 +1,4 @@
-service: aws-wsgi-flask
+service: aws-serverless-authorizer
 provider:
   name: aws
   runtime: python3.7
@@ -7,8 +7,17 @@ functions:
   api:
     handler: wsgi_handler.handler
     events:
-      - http: ANY /
-      - http: ANY {proxy+}
+      - http:
+          path: /
+          method: ANY
+          authorizer: ResourceAuthorizer
+      - http:
+          path: /{proxy+}
+          method: ANY
+          authorizer: ResourceAuthorizer
+  ResourceAuthorizer:
+    handler: handler/authorizer.handler
+    cors: true
 
 custom:
   wsgi:
